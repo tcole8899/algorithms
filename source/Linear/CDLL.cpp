@@ -1,38 +1,112 @@
 #include "LinkedList.hpp"
 
-LinkedList::LinkedList() {}
+LinkedList::LinkedList()
+{
+  head = nullptr;
+  tail = head;
+  len = 0;
+}
 
-LinkedList::~LinkedList() {}
+LinkedList::~LinkedList()
+{
+  clear();
+}
 
-unsigned int LinkedList::length() {}
+unsigned int LinkedList::length()
+{
+  return len;
+}
 
-void LinkedList::push_front(int d) {}
+void LinkedList::push_front(int d)
+{
+  Node *n = new Node(d);
+  if (!head)
+  {
+    head = n;
+    n->next = head;
+    n->prev = head;
+    len = 1;
+  }
+  else
+  {
+    Node *temp = head;
+    while (temp->next != head)
+    {
+      temp = temp->next;
+    }
+    temp->next = n;
+    n->next = head;
+    n->prev = temp;
+  }
+}
 
-int LinkedList::pop_front() {}
+int LinkedList::pop_front()
+{
+  Node *temp = head;
+  int ret = head -> data;
+  if (len == 1)
+  {
+    head->next->prev = nullptr;
+  }
+  else{
+    temp = temp -> next;
+    head = temp;
+    tail -> next = head;
+  }
 
-int LinkedList::index(int data) {}
+  return ret;
+}
 
-void LinkedList::push_back(int d) {}
+int LinkedList::index(int data)
+{
+  return 0;
+}
 
-int LinkedList::pop_back() {}
+void LinkedList::push_back(int d)
+{
+}
 
-int LinkedList::at(int idx) {}
+int LinkedList::pop_back()
+{
+  return 0;
+}
 
-int LinkedList::set(int idx, int d) {}
+int LinkedList::at(int idx)
+{
+  return 0;
+}
 
-void LinkedList::push(int d, int idx) {}
+int LinkedList::set(int idx, int d)
+{
+  return 0;
+}
 
-int LinkedList::pop(int idx) {}
+void LinkedList::push(int d, int idx)
+{
+}
 
-void LinkedList::clear() {}
+int LinkedList::pop(int idx)
+{
+  return 0;
+}
 
-void LinkedList::remove(int d) {}
+void LinkedList::clear()
+{
+}
 
-void LinkedList::reverse() {}
+void LinkedList::remove(int d)
+{
+}
 
-void LinkedList::print(std::ostream& oss) {
-  Node* temp = head;
-  while (temp) {
+void LinkedList::reverse()
+{
+}
+
+void LinkedList::print(std::ostream &oss)
+{
+  Node *temp = head;
+  while (temp)
+  {
     oss << temp->data << ", ";
     temp = temp->next;
   }
