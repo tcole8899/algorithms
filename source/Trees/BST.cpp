@@ -40,9 +40,54 @@ bool BST::search(int data) {
   return search(data, root);
 }
 
-Node* BST::remove(int data, Node* n) {}
+Node* BST::remove(int data, Node* n) {
+    if(!n)
+        return n;
+    else if(data == n->data){
+        //no children
+        if(!(n->left) && !(n->right)) {
+            return n;
+        }
+        //one child
+        else if(!(n->left) xor !(n->right)){ 
 
-void BST::remove(int data) {}
+            if(!(n->left)){ 
+                n->data = n->right->data;
+                return n->right;
+            }
+            else {
+                n->data = n->left->data;
+                return n->left;
+            }
+
+        }
+        //two children
+        else{
+            if(!n->right->left){
+                n->data = n->right->data;
+                return n->right;
+            }
+            else{
+                Node* temp = n;
+                n = n->right;
+                while(n->left){
+                    n = n->left;
+                }
+                n->data = temp->data;
+                return temp->left;
+            } 
+
+        }
+    }   
+    else if(data < n->data)
+        return remove(data, n->left);
+    else if(data > n->data)
+        return remove(data, n->right);
+}
+
+void BST::remove(int data) {
+    delete remove(data, root);
+}
 
 int max(int a, int b) {
   return (a > b) ? a : b;
